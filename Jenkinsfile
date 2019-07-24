@@ -3,7 +3,7 @@ pipeline {
  stages {
         stage('Checkout-git'){
                steps{
-		git poll: true, url: 'git@github.com:videocursoscloud/test-jenkins-1.git'
+		git poll: true, url: 'git@github.com:VictorMCL/test-jenkins.git'
                }
         }
         stage('CreateVirtualEnv') {
@@ -31,7 +31,7 @@ pipeline {
         stage('RunApp') {
             steps {
             	sh '''
-            		bash -c "source entorno_virtual/bin/activate ; ${WORKSPACE}/entorno_virtual/bin/python src/main.py &"
+            		bash -c "source entorno_virtual/bin/activate ; ${WORKSPACE}/entorno_virtual/bin/python src/app.py &"
                 '''
             }
         } 
@@ -45,8 +45,8 @@ pipeline {
     stage('PushDockerImage') {
             steps {
             	sh '''
-            		docker tag apptest:latest mijack/apptest:latest
-					docker push mijack/apptest:latest
+            		docker tag apptest:latest victormcl/apptest:latest
+					docker push victormcl/apptest:latest
 					docker rmi apptest:latest
                 '''
             }
