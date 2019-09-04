@@ -11,9 +11,14 @@ pipeline {
 	      git poll: true, url: 'git@github.com:VictorMCL/test-jenkins.git'
       }
     }
-    stage('build') {
+    stage('Instalando_dependencias') {
       steps {
         sh 'pip install -r requirements.txt'
+      }
+    }
+    stage('Ejecutar_Pruebas_Unitarias') {
+      steps {
+        sh 'pytest src/'
       }
     }
   }
